@@ -9,23 +9,26 @@ use yii\web\GroupUrlRule;
 
 /**
  * Cronmanagement Module
- *
- * @property \yii\i18n\Formatter $formatter
+ * @property array $methodfolders
  */
 class Module extends \yii\base\Module implements BootstrapInterface
 {
     /**
      * @inheritdoc
      */
-    public $layout = 'main';
+    public $layout = '@app/views/layouts/main';
+
     /**
      * @inheritdoc
      */
     public $controllerNamespace = 'basbeheertje\yii2\cronmanager\controllers';
+
     /**
      * @inheritdoc
      */
     public $defaultRoute = 'cron/index';
+
+    public $methodfolders = ['@app/models'];
 
     /**
      * @inheritdoc
@@ -37,10 +40,7 @@ class Module extends \yii\base\Module implements BootstrapInterface
                 'class' => GroupUrlRule::class,
                 'prefix' => $this->id,
                 'rules' => [
-                    'stats' => 'stat/index',
-                    'jobs' => 'job/index',
-                    'job/<id:\d+>/<action\w+>' => 'job/view-<action>',
-                    'workers' => 'worker/index',
+                    'cron' => 'cron/index',
                     '<controller:\w+>/<id:\d+>' => '<controller>/view',
                     '<controller:\w+>/<action\w+>/<id:\d+>' => '<controller>/<action>',
                     '<controller:\w+>/<action\w+>' => '<controller>/<action>',
