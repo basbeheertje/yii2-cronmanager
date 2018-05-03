@@ -1,0 +1,30 @@
+{
+    "name": "basbeheertje/yii2-cronmanager",
+    "description": "Yii2 Cronmanager",
+	"minimum-stability": "stable",
+    "type": "yii2-extension",
+    "keywords": ["yii", "cron", "manager"],
+    "license": "BSD-3-Clause",
+    "authors": [
+        {
+            "name": "Bas van Beers"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/basbeheertje/yii2-cronmanager/issues",
+        "source": "https://github.com/basbeheertje/yii2-cronmanager"
+    },
+    "require": {
+        "php": ">=5.4.0",
+		"yiisoft/yii2": "^2.0.6",
+		"yiisoft/yii2-bootstrap": "^2.0.5",
+		"mtdowling/cron-expression": "^1.1",
+		"voodoo-mobile/yii2-cron": ">=1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "mult1mate\\crontab\\": "src/",
+			"mult1mate\\crontab_tests\\": "tests/"
+        }
+    }
+}
