@@ -11,7 +11,7 @@ echo $this->render('tasks_template');
 <form method="post">
     <div class="col-lg-6">
         <div class="form-group">
-            <label for="method"><?php echo \Yii::t('cron','Methods'); ?></label>
+            <label for="method"><?php echo \Yii::t('app','Methods'); ?></label>
             <select class="form-control" id="method">
                 <option></option>
                 <?php foreach ($methods as $class => $class_methods): ?>
@@ -24,19 +24,19 @@ echo $this->render('tasks_template');
             </select>
         </div>
         <div class="form-group">
-            <label for="command"><?php echo \Yii::t('cron','Command'); ?></label>
+            <label for="command"><?php echo \Yii::t('app','Command'); ?></label>
             <input type="text" class="form-control" id="command" name="command" placeholder="Controller::method"
                    value="<?= $task->command ?>">
         </div>
         <div class="form-group">
-            <label for="status"><?php echo \Yii::t('cron','Status'); ?></label>
+            <label for="status"><?php echo \Yii::t('app','Status'); ?></label>
             <select name="status" class="form-control" id="status">
-                <option value="active"><?php echo \Yii::t('cron','Active'); ?></option>
+                <option value="active"><?php echo \Yii::t('app','Active'); ?></option>
                 <option value="inactive"<?php if ('inactive' == $task->status) echo ' selected' ?>><?php echo \Yii::t('app','Inactive'); ?></option>
             </select>
         </div>
         <div class="form-group">
-            <label for="comment"><?php echo \Yii::t('cron','Comment'); ?></label>
+            <label for="comment"><?php echo \Yii::t('app','Comment'); ?></label>
             <input type="text" class="form-control" id="comment" name="comment" value="<?= $task->comment ?>">
         </div>
 
@@ -45,12 +45,12 @@ echo $this->render('tasks_template');
         <?php endif; ?>
 
         <input type="hidden" name="<?= \Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->csrfToken; ?>"/>
-        <button type="submit" class="btn btn-primary"><?php echo \Yii::t('cron','Save'); ?></button>
+        <button type="submit" class="btn btn-primary"><?php echo \Yii::t('app','Save'); ?></button>
 
     </div>
     <div class="col-lg-6">
         <div class="form-group">
-            <label for="times"><?php echo \Yii::t('cron','Predefined intervals'); ?></label>
+            <label for="times"><?php echo \Yii::t('app','Predefined intervals'); ?></label>
             <select class="form-control" id="times" style="width: 200px;">
                 <option></option>
                 <option value="* * * * *">Minutely</option>
@@ -62,7 +62,7 @@ echo $this->render('tasks_template');
             </select>
         </div>
         <div class="form-group">
-            <label for="time"><?php echo \Yii::t('cron','Time'); ?></label>
+            <label for="time"><?php echo \Yii::t('app','Time'); ?></label>
             <input type="text" class="form-control" id="time" name="time" placeholder="* * * * *" value="<?= $task->time ?>" style="width: 200px;">
         </div>
     <pre>
@@ -76,7 +76,7 @@ echo $this->render('tasks_template');
 |    +-------------------- hour (0 - 23)
 +------------------------- min (0 - 59)
     </pre>
-        <h4><?php echo \Yii::t('cron','Next runs'); ?></h4>
+        <h4><?php echo \Yii::t('app','Next runs'); ?></h4>
         <div id="dates_list"></div>
     </div>
 </form>

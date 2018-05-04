@@ -10,7 +10,8 @@ use yii\web\AssetBundle;
  */
 class CronAsset extends AssetBundle
 {
-    public $sourcePath = '@vendor/basbeheertje/yii2-cronmanager/src/web';
+    public $basePath = '@webroot';
+    public $baseUrl = '@web';
     public $js = [
         'js/manager_actions.js',
     ];

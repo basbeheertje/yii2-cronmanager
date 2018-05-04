@@ -26,16 +26,8 @@ class Module extends \yii\base\Module implements BootstrapInterface
     /**
      * @inheritdoc
      */
-    public $defaultRoute = 'default/index';
+    public $defaultRoute = 'cron/index';
 
-    /**
-     * @var string
-     */
-    public $defaultController = 'default';
-
-    /**
-     * @var array
-     */
     public $methodfolders = ['@app/models'];
 
     /**

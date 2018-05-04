@@ -15,7 +15,7 @@ use Yii;
  * Class CronController
  * @package basbeheertje\yii2\cronmanager\controllers
  */
-class CronController extends Controller
+class DefaultController extends Controller
 {
 
     /**
@@ -91,7 +91,7 @@ class CronController extends Controller
     {
         return $this->render('tasks_list', array(
             'tasks' => Task::getList(),
-            'methods' => $this->getMethods(),//TaskLoader::getAllMethods(self::$tasks_controllers_folder, self::$tasks_namespace),
+            'methods' => $this->getMethods(),
         ));
     }
 
@@ -109,8 +109,8 @@ class CronController extends Controller
      */
     public function actionParseCrontab()
     {
-        if (isset($_POST['crontab'])) {
-            $result = TaskManager::parseCrontab($_POST['crontab'], new Task());
+        if (isset($_POST['crontab'])) {//@todo filter_output
+            $result = TaskManager::parseCrontab($_POST['crontab'], new Task());//@todo filter_output
             echo json_encode($result);
         }
     }
@@ -120,11 +120,11 @@ class CronController extends Controller
      */
     public function actionExportTasks()
     {
-        if (isset($_POST['folder'])) {
+        if (isset($_POST['folder'])) {//@todo filter_output
             $tasks = Task::getList();
             $result = array();
             foreach ($tasks as $t) {
-                $line = TaskManager::getTaskCrontabLine($t, $_POST['folder'], $_POST['php'], $_POST['file']);
+                $line = TaskManager::getTaskCrontabLine($t, $_POST['folder'], $_POST['php'], $_POST['file']);//@todo filter_output
                 $result[] = nl2br($line);
             }
             echo json_encode($result);
@@ -148,7 +148,7 @@ class CronController extends Controller
     public function actionRunTask()
     {
         if (isset($_POST['task_id'])) {//@todo use input filtering
-            $tasks = !is_array($_POST['task_id']) ? array($_POST['task_id']) : $_POST['task_id'];
+            $tasks = !is_array($_POST['task_id']) ? array($_POST['task_id']) : $_POST['task_id'];//@todo filter_output
             foreach ($tasks as $t) {
                 $task = Task::findOne($t);
                 /** @var Task $task */
@@ -156,7 +156,7 @@ class CronController extends Controller
                 echo($output . '<hr>');
             }
         } elseif (isset($_POST['custom_task'])) {//@todo use input filtering
-            $result = TaskRunner::parseAndRunCommand($_POST['custom_task']);
+            $result = TaskRunner::parseAndRunCommand($_POST['custom_task']);//@todo filter_output
             echo ($result) ? 'success' : 'failed';
         } else {
             echo 'empty task id';
@@ -168,7 +168,7 @@ class CronController extends Controller
      */
     public function actionGetDates()
     {
-        $time = $_POST['time'];
+        $time = $_POST['time'];//@todo filter_output
         $dates = TaskRunner::getRunDates($time);
         if (empty($dates)) {
             echo 'Invalid expression';
@@ -189,8 +189,8 @@ class CronController extends Controller
      */
     public function actionGetOutput()
     {
-        if (isset($_POST['task_run_id'])) {
-            $run = TaskRun::findOne($_POST['task_run_id']);
+        if (isset($_POST['task_run_id'])) {//@todo filter_output
+            $run = TaskRun::findOne($_POST['task_run_id']);//@todo filter_output
             /**
              * @var TaskRun $run
              */
@@ -207,21 +207,21 @@ class CronController extends Controller
      */
     public function actionTaskEdit()
     {
-        if (isset($_GET['task_id'])) {
-            $task = Task::findOne($_GET['task_id']);
+        if (isset($_GET['task_id'])) {//@todo filter_output
+            $task = Task::findOne($_GET['task_id']);//@todo filter_output
         } else {
             $task = new Task();
         }
         /**
          * @var Task $task
          */
-        if (!empty($_POST)) {
-            $task = TaskManager::editTask($task, $_POST['time'], $_POST['command'], $_POST['status'], $_POST['comment']);
+        if (!empty($_POST)) {//@todo filter_output
+            $task = TaskManager::editTask($task, $_POST['time'], $_POST['command'], $_POST['status'], $_POST['comment']);//@todo filter_output
         }
 
         return $this->render('task_edit', array(
             'task' => $task,
-            'methods' => TaskLoader::getAllMethods(self::$tasks_controllers_folder, self::$tasks_namespace),
+            'methods' => $this->getMethods(),
         ));
     }
 
@@ -230,8 +230,8 @@ class CronController extends Controller
      */
     public function actionTasksUpdate()
     {
-        if (isset($_POST['task_id'])) {
-            $tasks = Task::findAll($_POST['task_id']);
+        if (isset($_POST['task_id'])) {//@todo filter_output
+            $tasks = Task::findAll($_POST['task_id']);//@todo filter_output
             foreach ($tasks as $t) {
                 /**
                  * @var Task $t
@@ -253,8 +253,8 @@ class CronController extends Controller
      */
     public function actionTasksReport()
     {
-        $date_begin = isset($_GET['date_begin']) ? $_GET['date_begin'] : date('Y-m-d', strtotime('-6 day'));
-        $date_end = isset($_GET['date_end']) ? $_GET['date_end'] : date('Y-m-d');
+        $date_begin = isset($_GET['date_begin']) ? $_GET['date_begin'] : date('Y-m-d', strtotime('-6 day'));//@todo filter_output
+        $date_end = isset($_GET['date_end']) ? $_GET['date_end'] : date('Y-m-d');//@todo filter_output
 
         return $this->render('report', array(
             'report' => Task::getReport($date_begin, $date_end),
