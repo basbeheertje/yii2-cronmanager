@@ -22,8 +22,8 @@
     "php": ">=5.4.0",
     "yiisoft/yii2": "^2.0.6",
     "yiisoft/yii2-bootstrap": "^2.0.5",
-    "mtdowling/cron-expression": "^1.1",
-    "voodoo-mobile/yii2-cron": ">=1.0.0"
+    "mtdowling/cron-expression": "v1.1.0",
+    "voodoo-mobile/yii2-cron": "v1.0.0"
   },
   "autoload": {
     "psr-4": {
