@@ -5,6 +5,7 @@
 .idea
 .project
 .settings
+*.bak
 Thumbs.db
 nbproject
 
