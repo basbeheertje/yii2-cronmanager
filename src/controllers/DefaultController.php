@@ -1,4 +1,5 @@
 <?php
+
 namespace basbeheertje\yii2\cronmanager\controllers;
 
 use basbeheertje\yii2\cronmanager\assets\CronAsset;
@@ -9,6 +10,7 @@ use mult1mate\crontab\TaskLoader;
 use mult1mate\crontab\TaskRunner;
 use mult1mate\crontab\TaskManager;
 use yii\web\Controller;
+use yii\web\Application as WebApplication;
 use Yii;
 
 /**
@@ -27,7 +29,9 @@ class DefaultController extends Controller
     public function __construct($id, $module, $config = [])
     {
         parent::__construct($id, $module, $config);
-        CronAsset::register($this->view);
+        if (Yii::$app instanceof WebApplication) {
+            CronAsset::register($this->view);
+        }
     }
 
     /**
@@ -35,7 +39,8 @@ class DefaultController extends Controller
      * @param $file
      * @return null|string
      */
-    function extract_namespace($file) {
+    function extract_namespace($file)
+    {
         $ns = NULL;
         $handle = fopen($file, "r");
         if ($handle) {
@@ -55,26 +60,27 @@ class DefaultController extends Controller
      * @todo describe!
      * @return array
      */
-    protected function getMethods(){
+    protected function getMethods()
+    {
         /** @var array $methods */
         $methods = [];
 
         /** @var array $folders */
         $folders = Yii::$app->getModule('cron')->methodfolders;
 
-        if(is_string($folders)){
+        if (is_string($folders)) {
             $folders = [
                 $folders
             ];
         }
-        if(is_array($folders)){
-            foreach($folders as $folder){
+        if (is_array($folders)) {
+            foreach ($folders as $folder) {
                 /** @var string $folder */
                 /** @var array $files */
-                $files = glob($folder."*.php");
+                $files = glob($folder . "*.php");
                 /** @var string $firstFile */
                 $firstFile = $files[0];
-                if($firstFile) {
+                if ($firstFile) {
                     $namespace = $this->extract_namespace($firstFile) . '\\';
                     $methods = array_merge($methods, TaskLoader::getAllMethods($folder, $namespace));
                 }

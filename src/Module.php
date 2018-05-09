@@ -3,8 +3,8 @@
 namespace basbeheertje\yii2\cronmanager;
 
 use yii\base\BootstrapInterface;
-use yii\base\InvalidConfigException;
 use yii\web\Application as WebApplication;
+use yii\console\Application as ConsoleApp;
 use yii\web\GroupUrlRule;
 
 /**
@@ -38,12 +38,17 @@ class Module extends \yii\base\Module implements BootstrapInterface
      */
     public $methodfolders = ['@app/models'];
 
+    public function init()
+    {
+        parent::init();
+    }
+
     /**
      * @inheritdoc
      */
     public function bootstrap($app)
     {
-		// Make sure to register the base folder as alias as well or things like assets won't work anymore
+        // Make sure to register the base folder as alias as well or things like assets won't work anymore
         \Yii::setAlias('@basbeheertje/yii2/cronmanager', __DIR__);
         if ($app instanceof WebApplication) {
             $app->urlManager->addRules([[
@@ -56,15 +61,38 @@ class Module extends \yii\base\Module implements BootstrapInterface
                     '<controller:\w+>/<action\w+>' => '<controller>/<action>',
                 ],
             ]], false);
-        } else {
-            throw new InvalidConfigException('The module must be used for web application only.');
         }
-		if ($app->has('i18n')) {
-            $app->i18n->translations['cron'] = [
-                'class'          => 'yii\i18n\PhpMessageSource',
-                'sourceLanguage' => 'en',
-                'basePath'       => '@basbeheertje/yii2/cronmanager/messages',
-            ];
+        if ($app instanceof ConsoleApp) {
+            $app->controllerMap[$this->getCommandId()] = [
+                    'class' => $this->getCommandClass(),
+                ] + $this->getCommandOptions();
         }
+    }
+
+    /**
+     * Getter for CommandId
+     * @return string
+     */
+    public function getCommandId()
+    {
+        return "cron";
+    }
+
+    /**
+     * Getter for CommandClass
+     * @return string
+     */
+    public function getCommandClass()
+    {
+        return "basbeheertje\yii2\cronmanager\commands\CronController";
+    }
+
+    /**
+     * Getter for commandoptions
+     * @return array
+     */
+    public function getCommandOptions()
+    {
+        return [];
     }
 }
