@@ -62,11 +62,7 @@ class CronController extends Controller
      */
     public function actionIndex()
     {
-        if (!isset($this->message)) {
-            $this->message = "The following ";
-            $this->message .= (string)implode("\r\n", $this->getOptions());
-        }
-        echo $this->message . "\n";
+        return $this->actionRun();
     }
 
     /**
@@ -100,6 +96,10 @@ class CronController extends Controller
      */
     public function actionHelp()
     {
-        echo 'Help';
+        if (!isset($this->message)) {
+            $this->message = "The following actions are available:\r\n\r\n";
+            $this->message .= (string)implode("\r\n", $this->getOptions());
+        }
+        echo $this->message . "\n";
     }
 }
