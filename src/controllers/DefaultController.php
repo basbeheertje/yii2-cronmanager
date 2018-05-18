@@ -143,6 +143,11 @@ class DefaultController extends Controller
      */
     public function actionTaskLog()
     {
+        if(isset($_GET['task_run_id'])){
+            $task_run_id = isset($_GET['task_run_id']) ? $_GET['task_run_id'] : null; //@todo use get from the framework with inputfiltering
+            $model = TaskRun::find()->where(['task_run_id' => $_GET['task_run_id']])->one();//getLast($task_run_id);
+            return $this->render('task_run_id', array('model' => $model));
+        }
         $task_id = isset($_GET['task_id']) ? $_GET['task_id'] : null; //@todo use get from the framework with inputfiltering
         $runs = TaskRun::getLast($task_id);
         return $this->render('runs_list', array('runs' => $runs));

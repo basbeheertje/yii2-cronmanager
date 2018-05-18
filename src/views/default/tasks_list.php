@@ -9,13 +9,13 @@ echo $this->render('tasks_template');
         <th>
             <input type="checkbox" id="select_all">
         </th>
-        <th><?php echo \Yii::t('cron','ID'); ?></th>
-        <th><?php echo \Yii::t('cron','Time'); ?></th>
-        <th><?php echo \Yii::t('cron','Command'); ?></th>
-        <th><?php echo \Yii::t('cron','Status'); ?></th>
-        <th><?php echo \Yii::t('cron','Comment'); ?></th>
-        <th><?php echo \Yii::t('cron','Created'); ?></th>
-        <th><?php echo \Yii::t('cron','Updated'); ?></th>
+        <th><?php echo Yii::t('cron', 'ID'); ?></th>
+        <th><?php echo Yii::t('cron', 'Time'); ?></th>
+        <th><?php echo Yii::t('cron', 'Command'); ?></th>
+        <th><?php echo Yii::t('cron', 'Status'); ?></th>
+        <th><?php echo Yii::t('cron', 'Comment'); ?></th>
+        <th><?php echo Yii::t('cron', 'Created'); ?></th>
+        <th><?php echo Yii::t('cron', 'Updated'); ?></th>
         <th></th>
         <th></th>
         <th></th>
@@ -39,25 +39,25 @@ echo $this->render('tasks_template');
             <td><?= $t->ts ?></td>
             <td><?= $t->ts_updated ?></td>
             <td>
-                <a href="<?php echo Url::to(['default/task-edit','task_id'=>$t->task_id]); ?>"><?php echo Yii::t('cron','Edit'); ?></a>
+                <a href="<?php echo Url::to(['default/task-edit', 'task_id' => $t->task_id]); ?>"><?php echo Yii::t('cron', 'Edit'); ?></a>
             </td>
             <td>
-                <a href="<?php echo Url::to(['default/task-log','task_id'=>$t->task_id]); ?>"><?php echo Yii::t('cron','Log'); ?></a>
+                <a href="<?php echo Url::to(['default/task-log', 'task_id' => $t->task_id]); ?>"><?php echo Yii::t('cron', 'Log'); ?></a>
             </td>
             <td>
-                <a href="<?php echo $t->task_id; ?>" class="run_task"><?php echo Yii::t('cron','Run'); ?></a>
+                <a href="<?php echo $t->task_id; ?>" class="run_task"><?php echo Yii::t('cron', 'Run'); ?></a>
             </td>
         </tr>
     <?php endforeach; ?>
 </table>
 <form class="form-inline">
     <div class="form-group">
-        <label for="action"><?php echo \Yii::t('cron','With selected'); ?></label>
+        <label for="action"><?php echo Yii::t('cron', 'With selected'); ?></label>
         <select class="form-control" id="action">
-            <option><?php echo \Yii::t('cron','Enable'); ?></option>
-            <option><?php echo \Yii::t('cron','Disable'); ?></option>
-            <option><?php echo \Yii::t('cron','Delete'); ?></option>
-            <option><?php echo \Yii::t('cron','Run'); ?></option>
+            <option><?php echo Yii::t('cron', 'Enable'); ?></option>
+            <option><?php echo Yii::t('cron', 'Disable'); ?></option>
+            <option><?php echo Yii::t('cron', 'Delete'); ?></option>
+            <option><?php echo Yii::t('cron', 'Run'); ?></option>
         </select>
     </div>
     <div class="form-group">
@@ -65,9 +65,9 @@ echo $this->render('tasks_template');
     </div>
 </form>
 <form class="form-inline">
-    <h3><?php echo \Yii::t('cron','Run custom task'); ?></h3>
+    <h3><?php echo Yii::t('cron', 'Run custom task'); ?></h3>
     <div class="form-group">
-        <label for="method"><?php echo \Yii::t('cron','Methods'); ?></label>
+        <label for="method"><?php echo \Yii::t('cron', 'Methods'); ?></label>
         <select class="form-control" id="method">
             <option></option>
             <?php foreach ($methods as $class => $class_methods): ?>
@@ -80,12 +80,12 @@ echo $this->render('tasks_template');
         </select>
     </div>
     <div class="form-group">
-        <label for="command"><?php echo \Yii::t('cron','Command'); ?></label>
+        <label for="command"><?php echo \Yii::t('cron', 'Command'); ?></label>
         <input type="text" class="form-control" id="command" name="command" placeholder="Controller::method" style="width: 300px;">
     </div>
     <input type="submit" value="Run" class="btn btn-primary" id="run_custom_task">
 </form>
 <div id="output_section" style="display: none;">
-    <h3><?php echo \Yii::t('cron','Task output'); ?></h3>
+    <h3><?php echo Yii::t('cron', 'Task output'); ?></h3>
     <pre id="task_output_container"></pre>
 </div>

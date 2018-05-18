@@ -20,16 +20,26 @@ use yii\db\ActiveRecord;
  */
 class Task extends ActiveRecord implements TaskInterface
 {
+    /**
+     * @return string
+     */
     public static function tableName()
     {
         return 'tasks';
     }
 
+    /**
+     * @param int $task_id
+     * @return null|static
+     */
     public static function taskGet($task_id)
     {
         return self::findOne($task_id);
     }
 
+    /**
+     * @return array|ActiveRecord[]
+     */
     public static function getList()
     {
         return self::findBySql("SELECT * FROM `tasks`
@@ -37,11 +47,19 @@ class Task extends ActiveRecord implements TaskInterface
         ORDER BY status, task_id DESC")->all();
     }
 
+    /**
+     * @return static[]
+     */
     public static function getAll()
     {
         return self::findAll([]);
     }
 
+    /**
+     * @param $date_begin
+     * @param $date_end
+     * @return array
+     */
     public static function getReport($date_begin, $date_end)
     {
         $sql = "SELECT t.command, t.task_id,
@@ -61,16 +79,25 @@ class Task extends ActiveRecord implements TaskInterface
         ))->queryAll();
     }
 
+    /**
+     * @return false|int
+     */
     public function taskDelete()
     {
         return $this->delete();
     }
 
+    /**
+     * @return bool
+     */
     public function taskSave()
     {
         return $this->save();
     }
 
+    /**
+     * @return Task
+     */
     public static function createNew()
     {
         return new self();

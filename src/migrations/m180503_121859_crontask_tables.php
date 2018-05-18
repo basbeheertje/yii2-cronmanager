@@ -7,7 +7,6 @@ use yii\db\Migration;
  */
 class m180503_121859_crontask_tables extends Migration
 {
-    use console\traits\TextTypesTrait;
 
     /**
      * {@inheritdoc}
@@ -56,7 +55,7 @@ class m180503_121859_crontask_tables extends Migration
      */
     public function safeDown()
     {
-		$this->dropTable('task_runs');
+        $this->dropTable('task_runs');
         $this->dropTable('tasks');
     }
 }

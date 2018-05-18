@@ -1,14 +1,17 @@
 <?php
+
+use yii\helpers\Url;
+
 echo $this->render('tasks_template');
 ?>
 <table class="table table-bordered">
     <tr>
-        <th><?php echo \Yii::t('cron','ID'); ?></th>
-        <th><?php echo \Yii::t('cron','Task ID'); ?></th>
-        <th><?php echo \Yii::t('cron','Command'); ?></th>
-        <th><?php echo \Yii::t('cron','Status'); ?></th>
-        <th><?php echo \Yii::t('cron','Time'); ?></th>
-        <th><?php echo \Yii::t('cron','Started'); ?></th>
+        <th><?php echo Yii::t('cron', 'ID'); ?></th>
+        <th><?php echo Yii::t('cron', 'Task ID'); ?></th>
+        <th><?php echo Yii::t('cron', 'Command'); ?></th>
+        <th><?php echo Yii::t('cron', 'Status'); ?></th>
+        <th><?php echo Yii::t('cron', 'Time'); ?></th>
+        <th><?php echo Yii::t('cron', 'Started'); ?></th>
         <th></th>
     </tr>
     <?php foreach ($runs as $r):
@@ -25,9 +28,9 @@ echo $this->render('tasks_template');
             <td><?= $r['ts'] ?></td>
             <td>
                 <?php if (!empty($r['output'])): ?>
-                    <a href="<?= $r['task_run_id'] ?>" data-toggle="modal" data-target="#output_modal" class="show_output">
-						<?php echo \Yii::t('cron','Show output'); ?>
-					</a>
+                    <a href="<?php echo Url::to(['default/task-log', 'task_run_id' => $r['task_run_id']]); ?>" data-toggle="modal" data-target="#output_modal" class="show_output">
+                        <?php echo Yii::t('cron', 'Show output'); ?>
+                    </a>
                 <?php endif; ?>
             </td>
         </tr>
@@ -38,12 +41,12 @@ echo $this->render('tasks_template');
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-                <h4 class="modal-title" id="myModalLabel"><?php echo \Yii::t('cron','Task run output'); ?></h4>
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><?php echo Yii::t('cron', 'Task run output'); ?></h4>
             </div>
             <div class="modal-body">
-                <pre id="output_container"><?php echo \Yii::t('cron','Loading...'); ?></pre>
+                <pre id="output_container"><?php echo Yii::t('cron', 'Loading...'); ?></pre>
             </div>
         </div>
     </div>
