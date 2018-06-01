@@ -48,6 +48,16 @@ class m180503_121859_crontask_tables extends Migration
         ) ENGINE = InnoDB AUTO_INCREMENT = 1 DEFAULT CHARSET = utf8;");
 
         }
+
+        $this->insert(
+            'tasks',
+            [
+                'time' => "*/5 * * * *",
+                "command" => "basbeheertje\yii2\cronmanager\jobs\CronErrorChecker::execute()",
+                "ts" => date('Y-m-d H:i:s'),
+                "ts_updated" => date('Y-m-d H:i:s')
+            ]
+        );
     }
 
     /**

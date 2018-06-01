@@ -14,6 +14,7 @@ use yii\db\Query;
  * @property string $output
  * @property int $execution_time
  * @property string $ts
+ * @property Task $task
  */
 class TaskRun extends ActiveRecord implements TaskRunInterface
 {
@@ -153,5 +154,14 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     public function setOutput($output)
     {
         $this->output = $output;
+    }
+
+    /**
+     * @todo describe
+     * @return \yii\db\ActiveQuery
+     */
+    public function getTask()
+    {
+        return $this->hasOne(Task::className(), ['task_id' => 'task_id']);
     }
 }

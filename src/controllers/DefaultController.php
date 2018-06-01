@@ -12,6 +12,7 @@ use mult1mate\crontab\TaskManager;
 use yii\web\Controller;
 use yii\web\Application as WebApplication;
 use Yii;
+use basbeheertje\yii2\cronmanager\Module;
 
 /**
  * Class CronController
@@ -19,6 +20,10 @@ use Yii;
  */
 class DefaultController extends Controller
 {
+    /**
+     * @var Module
+     */
+    public $module;
 
     /**
      * CronController constructor.
@@ -66,7 +71,7 @@ class DefaultController extends Controller
         $methods = [];
 
         /** @var array $folders */
-        $folders = Yii::$app->getModule('cron')->methodfolders;
+        $folders = $this->module->methodfolders;
 
         if (is_string($folders)) {
             $folders = [
