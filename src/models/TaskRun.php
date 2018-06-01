@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 use yii\db\Query;
 
 /**
+ * @todo describe
  * @property int $task_run_id
  * @property int $task_id
  * @property string $status
@@ -16,11 +17,21 @@ use yii\db\Query;
  */
 class TaskRun extends ActiveRecord implements TaskRunInterface
 {
+    /**
+     * @todo describe
+     * @return string
+     */
     public static function tableName()
     {
         return 'task_runs';
     }
 
+    /**
+     * @todo describe
+     * @param null $task_id
+     * @param int $count
+     * @return array
+     */
     public static function getLast($task_id = null, $count = 100)
     {
         $db = (new Query())
@@ -36,12 +47,17 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
         return $db->all();
     }
 
+    /**
+     * @todo describe
+     * @return bool
+     */
     public function saveTaskRun()
     {
         return $this->save();
     }
 
     /**
+     * @todo describe
      * @return int
      */
     public function getTaskRunId()
@@ -50,6 +66,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @return int
      */
     public function getTaskId()
@@ -58,6 +75,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @param int $task_id
      */
     public function setTaskId($task_id)
@@ -66,6 +84,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @return string
      */
     public function getStatus()
@@ -74,6 +93,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @param string $status
      */
     public function setStatus($status)
@@ -82,6 +102,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @return int
      */
     public function getExecutionTime()
@@ -90,6 +111,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @param int $execution_time
      */
     public function setExecutionTime($execution_time)
@@ -98,6 +120,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @return string
      */
     public function getTs()
@@ -106,6 +129,7 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
     }
 
     /**
+     * @todo describe
      * @param string $ts
      */
     public function setTs($ts)
@@ -113,11 +137,19 @@ class TaskRun extends ActiveRecord implements TaskRunInterface
         $this->ts = $ts;
     }
 
+    /**
+     * @todo describe
+     * @return string
+     */
     public function getOutput()
     {
         return $this->output;
     }
 
+    /**
+     * @todo describe
+     * @param string $output
+     */
     public function setOutput($output)
     {
         $this->output = $output;
