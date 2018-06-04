@@ -21,7 +21,7 @@ class RemoveTaskRuns extends BaseObject
     {
         /** @var TaskRun[] $toRemove */
         $toRemove = TaskRun::find()
-            ->where(['<', 'ts', date('Y-m-d H:i:s', strtotime('-5 hours'))])
+            ->where(['<', 'ts', date('Y-m-d H:i:s', strtotime('-5 days'))])
             ->all();
         if ($toRemove) {
             foreach ($toRemove as $removable) {
