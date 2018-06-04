@@ -53,7 +53,6 @@ class Task extends ActiveRecord implements TaskInterface
     public static function getAll()
     {
         return self::find()->all();
-        //return self::findAll([]);
     }
 
     /**
