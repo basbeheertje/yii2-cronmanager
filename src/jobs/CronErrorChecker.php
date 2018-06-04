@@ -23,10 +23,10 @@ class CronErrorChecker extends BaseObject
         $failedRuns = TaskRun::find()
             ->where(
                 [
-                    'status' => TaskRun::RUN_STATUS_ERROR,
-                    'ts' => date('Y-m-d H:i:s', strtotime('-5 minutes'))
+                    'status' => TaskRun::RUN_STATUS_ERROR
                 ]
             )
+            ->andWhere(['>', 'ts', date('Y-m-d H:i:s', strtotime('-5 minutes'))])
             ->all();
         if ($failedRuns) {
             /** @var string $textBody */
