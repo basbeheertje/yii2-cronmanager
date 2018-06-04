@@ -42,5 +42,6 @@ class CronErrorChecker extends BaseObject
                 ->setTextBody($textBody)
                 ->send();
         }
+        return true;
     }
 }
